@@ -3,17 +3,19 @@ import 'package:todo_app/utils/colors.dart';
 import 'package:todo_app/utils/texts.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard(
-      {Key? key,
-      required this.text,
-      required this.category,
-      required this.time,
-      required this.priority,})
-      : super(key: key);
+  const TaskCard({
+    Key? key,
+    required this.text,
+    required this.category,
+    required this.time,
+    required this.priority, 
+    required this.color,
+  }) : super(key: key);
   final String? text;
   final String category;
   final String time;
   final String priority;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +25,6 @@ class TaskCard extends StatelessWidget {
           border: Border.all(color: kPrimaryColor),
           borderRadius: BorderRadius.circular(15)),
       child: Row(children: [
-       
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,7 +51,7 @@ class TaskCard extends StatelessWidget {
               height: 10,
               width: 35,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: color,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
@@ -64,4 +65,6 @@ class TaskCard extends StatelessWidget {
       ]),
     );
   }
+
+
 }

@@ -23,12 +23,12 @@ class _TaskViewState extends State<TaskView> {
   final TextEditingController _hour2Controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? categoryValue;
-  String? priorityValue;
+  String? priorityValue = "Normal";
   String? time1Value;
   String? time2Value;
   String? time3Value;
 
-late  DateTime _dateTime = DateTime.now();
+  late DateTime _dateTime = DateTime.now();
 
   Future<Null> _selectedDate(BuildContext context) async {
     DateTime? _datePicker = await showDatePicker(
@@ -38,10 +38,22 @@ late  DateTime _dateTime = DateTime.now();
       firstDate: DateTime(1947),
       lastDate: DateTime(2030),
     );
-    if (_datePicker!=null && _datePicker!=_dateTime){
+    if (_datePicker != null && _datePicker != _dateTime) {
       setState(() {
-        _dateTime =_datePicker;
-      
+        _dateTime = _datePicker;
+      });
+    }
+  }
+
+  late TimeOfDay _time = TimeOfDay.now();
+  Future<Null> _selectedTime(BuildContext context) async {
+    TimeOfDay? _timePicker = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (_timePicker != null && _timePicker != _time) {
+      setState(() {
+        _time = _timePicker;
       });
     }
   }
@@ -109,6 +121,7 @@ late  DateTime _dateTime = DateTime.now();
                           color: Colors.white,
                         ),
                         AppTextField(
+                          keyboardType: TextInputType.name,
                           controller: _taskController,
                           validMessage: "Textfield can't be empty",
                           hintText: "Write your task",
@@ -121,6 +134,7 @@ late  DateTime _dateTime = DateTime.now();
                           color: Colors.white,
                         ),
                         AppTextField(
+                          keyboardType: TextInputType.name,
                           controller: _categoryController,
                           validMessage: "Category can't be empty",
                           hintText: "Enter the Category",
@@ -133,10 +147,12 @@ late  DateTime _dateTime = DateTime.now();
                           color: Colors.white,
                         ),
                         AppTextField(
-                          onTap: () async{
-                            await  _selectedDate(context);
-                           setState(() {
-                              _dateController.text = DateFormat.yMMMd().format(_dateTime);
+                          keyboardType: TextInputType.datetime,
+                          onTap: () async {
+                            await _selectedDate(context);
+                            setState(() {
+                              _dateController.text =
+                                  DateFormat.yMMMd().format(_dateTime);
                             });
                           },
                           controller: _dateController,
@@ -157,6 +173,16 @@ late  DateTime _dateTime = DateTime.now();
                                     color: Colors.white,
                                   ),
                                   AppTextField(
+                                    keyboardType: TextInputType.datetime,
+                                    onTap: () async {
+                                      await _selectedTime(context);
+                                      setState(() {
+                                        final time =
+                                            MaterialLocalizations.of(context)
+                                                .formatTimeOfDay(_time);
+                                        _hour1Controller.text = time;
+                                      });
+                                    },
                                     controller: _hour1Controller,
                                     validMessage: "Time can't be empty",
                                     hintText: "Enter the Time",
@@ -185,6 +211,16 @@ late  DateTime _dateTime = DateTime.now();
                                     color: Colors.white,
                                   ),
                                   AppTextField(
+                                    keyboardType: TextInputType.datetime,
+                                    onTap: () async {
+                                      await _selectedTime(context);
+                                      setState(() {
+                                        final time2 =
+                                            MaterialLocalizations.of(context)
+                                                .formatTimeOfDay(_time);
+                                        _hour2Controller.text = time2;
+                                      });
+                                    },
                                     controller: _hour2Controller,
                                     validMessage: "Time can't be empty",
                                     hintText: "Enter the Time",
@@ -221,18 +257,18 @@ late  DateTime _dateTime = DateTime.now();
                         ),
                         InkWell(
                           onTap: () {
-                            if(_formKey.currentState!.validate()) {
-                               widget.getData(
-                              {
-                                "text": _taskController.text,
-                                "category": _categoryController.text,
-                                "priority": priorityValue,
-                                "date": _dateController.text,
-                                "time":
-                                    "${_hour1Controller.text} - ${_hour2Controller.text} ",
-                              },
-                            );
-                            Navigator.pop(context);
+                            if (_formKey.currentState!.validate()) {
+                              widget.getData(
+                                {
+                                  "text": _taskController.text,
+                                  "category": _categoryController.text,
+                                  "priority": priorityValue,
+                                  "date": _dateController.text,
+                                  "time":
+                                      "${_hour1Controller.text} - ${_hour2Controller.text} ",
+                                },
+                              );
+                              Navigator.pop(context);
                             }
                           },
                           child: Center(

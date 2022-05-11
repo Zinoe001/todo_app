@@ -7,13 +7,14 @@ class AppTextField extends StatelessWidget {
     required this.validMessage,
     required this.hintText,
     this.onTap, 
+    required this.keyboardType,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String validMessage;
   final String hintText;
   final Function()? onTap;
-
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class AppTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
+        keyboardType: keyboardType,
         controller: controller,
         validator: (value){
           if(value?.isEmpty ?? true ) return validMessage;

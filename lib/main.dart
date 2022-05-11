@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/utils/colors.dart';
 import 'package:todo_app/views/home/home_view.dart';
+import 'package:todo_app/views/splash/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Todo's",
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: kPrimaryColor,
       ),
-      home: const HomeView(),
+      home: const SplashView(),
     );
   }
 }
