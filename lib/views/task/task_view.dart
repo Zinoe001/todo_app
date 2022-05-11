@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/utils/colors.dart';
+import 'package:todo_app/utils/preference_services.dart';
 import 'package:todo_app/utils/texts.dart';
 import 'package:todo_app/widgets/app_menu_button.dart';
 import 'package:todo_app/widgets/app_text_field.dart';
@@ -22,6 +23,7 @@ class _TaskViewState extends State<TaskView> {
   final TextEditingController _hour1Controller = TextEditingController();
   final TextEditingController _hour2Controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final PreferenceServices prefs = PreferenceServices();
   String? categoryValue;
   String? priorityValue = "Normal";
   String? time1Value;
@@ -259,6 +261,7 @@ class _TaskViewState extends State<TaskView> {
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
                               widget.getData(
+                                
                                 {
                                   "text": _taskController.text,
                                   "category": _categoryController.text,
@@ -270,6 +273,7 @@ class _TaskViewState extends State<TaskView> {
                               );
                               Navigator.pop(context);
                             }
+
                           },
                           child: Center(
                             child: Container(
