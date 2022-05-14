@@ -1,3 +1,5 @@
+
 class MyList {
-   List<String> priority = ["High", "Normal","Low"];
+  List<String> prority = ["High", "Normal", "Low"];
 }
+

@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/utils/colors.dart';
 import 'package:todo_app/utils/texts.dart';
+import 'package:todo_app/widgets/my_list.dart';
 
 class MenuButton extends StatefulWidget {
   MenuButton({
     Key? key,
-    required this.item,
     required this.hintText,
-    this.value,
+    this.priority,
     required this.onChanged,
   }) : super(key: key);
-  List<String> item;
   final String hintText;
   final Function(String?) onChanged;
-  late String? value;
+  late String? priority;
   @override
   State<MenuButton> createState() => _MenuButtonState();
 }
 
 class _MenuButtonState extends State<MenuButton> {
-  
+  MyList list = MyList();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,18 +37,18 @@ class _MenuButtonState extends State<MenuButton> {
             text: widget.hintText,
             color: Colors.white,
           ),
-          value: widget.value,
-          items: widget.item.map(buildMenuItem).toList(),
+          value: widget.priority,
+          items: list.prority.map(buildMenuItem).toList(),
           onChanged: widget.onChanged,
         ),
       ),
     );
   }
 
-  DropdownMenuItem<String> buildMenuItem(item) => DropdownMenuItem(
-      value: item,
+  DropdownMenuItem<String> buildMenuItem(String value) => DropdownMenuItem(
+      value: value ,
       child: AppText.heading5(
-        text: item,
+        text: value,
         color: Colors.white,
       ));
 }

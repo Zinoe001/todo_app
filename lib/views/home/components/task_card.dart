@@ -25,19 +25,21 @@ class TaskCard extends StatelessWidget {
           border: Border.all(color: kPrimaryColor),
           borderRadius: BorderRadius.circular(15)),
       child: Row(children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppText.heading6(text: text ?? ""),
-            const SizedBox(
-              height: 7,
-            ),
-            AppText.small(text: category),
-            const SizedBox(
-              height: 3,
-            ),
-            AppText.small(text: time),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               AppText.heading6(text: text ?? ""),
+              const SizedBox(
+                height: 7,
+              ),
+              AppText.small(text: category),
+              const SizedBox(
+                height: 3,
+              ),
+              AppText.small(text: time),
+            ],
+          ),
         ),
         const Spacer(),
         Column(
@@ -65,6 +67,6 @@ class TaskCard extends StatelessWidget {
       ]),
     );
   }
-
+   
 
 }

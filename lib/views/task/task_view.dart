@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/utils/colors.dart';
-import 'package:todo_app/utils/preference_services.dart';
 import 'package:todo_app/utils/texts.dart';
 import 'package:todo_app/widgets/app_menu_button.dart';
 import 'package:todo_app/widgets/app_text_field.dart';
@@ -16,19 +15,18 @@ class TaskView extends StatefulWidget {
 }
 
 class _TaskViewState extends State<TaskView> {
-  final MyList _list = MyList();
   final TextEditingController _taskController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _hour1Controller = TextEditingController();
   final TextEditingController _hour2Controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final PreferenceServices prefs = PreferenceServices();
   String? categoryValue;
   String? priorityValue = "Normal";
   String? time1Value;
   String? time2Value;
   String? time3Value;
+  final MyList list = MyList();
 
   late DateTime _dateTime = DateTime.now();
 
@@ -241,8 +239,7 @@ class _TaskViewState extends State<TaskView> {
                             children: [
                               Expanded(
                                 child: MenuButton(
-                                  value: priorityValue,
-                                  item: _list.priority,
+                                  priority: priorityValue,
                                   hintText: "Add Priority",
                                   onChanged: (value) {
                                     setState(() {
@@ -258,10 +255,9 @@ class _TaskViewState extends State<TaskView> {
                           height: 70,
                         ),
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
                             if (_formKey.currentState!.validate()) {
                               widget.getData(
-                                
                                 {
                                   "text": _taskController.text,
                                   "category": _categoryController.text,
@@ -271,9 +267,9 @@ class _TaskViewState extends State<TaskView> {
                                       "${_hour1Controller.text} - ${_hour2Controller.text} ",
                                 },
                               );
-                              Navigator.pop(context);
+                              
+                              Navigator.pop(context,);
                             }
-
                           },
                           child: Center(
                             child: Container(
