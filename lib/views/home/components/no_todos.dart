@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/utils/texts.dart';
+import 'package:todo_app/core/utils/texts.dart';
 
 class NoTodos extends StatelessWidget {
   const NoTodos({Key? key}) : super(key: key);

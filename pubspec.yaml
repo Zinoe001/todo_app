@@ -38,6 +38,8 @@ dependencies:
   sliver_tools: ^0.2.6
   intl: ^0.17.0
   shared_preferences: ^2.0.13
+  fluttertoast: ^8.0.9
+  flutter_flushbar: ^0.0.2
   
 
 dev_dependencies:
@@ -60,8 +62,8 @@ flutter_native_splash:
   # of your splash screen to a solid color.  Use background_image to set the background of your
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
-  # color: "#42a5f5"
-  background_image: "assets/png/splash.png"
+  color: "#ED2E64"
+  # background_image: "assets/png/splash.png"
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
   # the leading # character.

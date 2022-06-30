@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/utils/colors.dart';
+import 'package:todo_app/core/services/preference_services.dart';
+import 'package:todo_app/core/utils/colors.dart';
 import 'package:todo_app/views/home/components/body.dart';
 import 'package:todo_app/views/task/task_view.dart';
-import 'package:todo_app/widgets/my_list.dart';
-import 'package:todo_app/widgets/preference_services.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -27,52 +26,41 @@ class _HomeViewState extends State<HomeView> {
 
   final PreferenceServices _prefs = PreferenceServices();
 
-  final MyList _list = MyList();
-
   bool loading = false;
 
   List<Map<String, dynamic>> incompleteCardData = [];
 
   List<Map<String, dynamic>> completeCardData = [];
 
+  late final int index;
+
   getSaved() async {
     await _prefs.init();
-    setState((){
-      print("getting data from saved list incompletecard");
-       incompleteCardData.addAll(_prefs.incompleteDataList);
-      print(_prefs.incompleteDataList);
-      print("getting data from  saved list completecard");
+    setState(() {
+      incompleteCardData.addAll(_prefs.incompleteDataList);
       completeCardData.addAll(_prefs.completeDataList);
-      print(_prefs.completeDataList);
     });
   }
+// final TodoFunctions _functions = TodoFunctions();
 
   // function to get data from to do's created in the TaskView
   // and add to incompletedCardData list
   data(Map<String, dynamic> item) {
-    print("taking data");
-    print(item);
     setState(() {
       incompleteCardData.add(item);
+      incompleteCardData.sort((a, b) => a["date"].compareTo(b["date"]));
     });
-    print(incompleteCardData);
     _prefs.saveIncomplete(incompleteCardData);
-    print("done");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: loading
-            // if loading is true show a circle_progress_indicator in the center
-            ? Center(child: CircularProgressIndicator())
-            // if loading is false show the home view
-            : Body(
-                incompleteCardData: incompleteCardData,
-                completeCardData: completeCardData,
-              ),
-      ),
+      backgroundColor: Colors.white,
+      body:Body(
+              incompleteCardData: incompleteCardData,
+              completeCardData: completeCardData,
+            ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
         onPressed: () {

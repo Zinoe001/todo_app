@@ -34,7 +34,7 @@ TextStyle headingStyle6 = GoogleFonts.poppins(
 
 TextStyle buttonStyle = GoogleFonts.poppins(
   fontSize:18,
-  fontWeight: FontWeight.w500 
+  fontWeight: FontWeight.w400 
 );
 
 TextStyle bodyStyle = GoogleFonts.poppins(

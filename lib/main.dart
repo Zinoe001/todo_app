@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/utils/colors.dart';
+import 'package:todo_app/core/utils/colors.dart';
 import 'package:todo_app/views/splash/splash_view.dart';
 
 void main() {

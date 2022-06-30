@@ -22,7 +22,7 @@ class AppTextField extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
         keyboardType: keyboardType,

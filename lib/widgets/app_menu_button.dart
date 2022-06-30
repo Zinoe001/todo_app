@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:todo_app/utils/colors.dart';
-import 'package:todo_app/utils/texts.dart';
+import 'package:todo_app/core/utils/colors.dart';
+import 'package:todo_app/core/utils/texts.dart';
 import 'package:todo_app/widgets/my_list.dart';
 
 class MenuButton extends StatefulWidget {

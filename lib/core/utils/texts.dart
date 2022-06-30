@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/constants/textstyles.dart';
+import 'package:todo_app/core/constants/textstyles.dart';
 
 class AppText extends StatelessWidget {
   //constructor for heading 1 style
